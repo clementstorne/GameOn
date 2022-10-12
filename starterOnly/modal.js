@@ -15,8 +15,9 @@ const modalCloseButton = document.querySelector(".close");
 const firstname = document.getElementById("first");
 const lastname = document.getElementById("last");
 const email = document.getElementById("email");
+const birthdate = document.getElementById("birthdate");
 
-// console.log(formData[0]);
+// console.log(formData[3]);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -72,5 +73,20 @@ email.addEventListener("change", () => {
   } else {
     delete formData[2].dataset.error;
     delete formData[2].dataset.errorVisible;
+  }
+});
+
+function isBirthdateValid(str) {
+  let regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+  return regex.test(str);
+}
+
+birthdate.addEventListener("change", () => {
+  if (!isBirthdateValid(birthdate.value)) {
+    formData[3].dataset.error = "Vous devez entrer votre date de naissance.";
+    formData[3].dataset.errorVisible = "true";
+  } else {
+    delete formData[3].dataset.error;
+    delete formData[3].dataset.errorVisible;
   }
 });
