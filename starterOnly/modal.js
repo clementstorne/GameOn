@@ -16,6 +16,7 @@ const firstname = document.getElementById("first");
 const lastname = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
+const quantity = document.getElementById("quantity");
 
 // console.log(formData[3]);
 
@@ -88,5 +89,23 @@ birthdate.addEventListener("change", () => {
   } else {
     delete formData[3].dataset.error;
     delete formData[3].dataset.errorVisible;
+  }
+});
+
+function isANumber(str) {
+  let regex = /^[0-9]+$/;
+  return regex.test(str);
+}
+
+quantity.addEventListener("change", () => {
+  if (!isANumber(quantity.value)) {
+    formData[4].dataset.error = "Veuillez saisir une valeur numérique.";
+    formData[4].dataset.errorVisible = "true";
+  } else if (quantity.value < 0 || quantity.value > 99) {
+    formData[4].dataset.error = "La valeur doit être comprise entre 0 et 99.";
+    formData[4].dataset.errorVisible = "true";
+  } else {
+    delete formData[4].dataset.error;
+    delete formData[4].dataset.errorVisible;
   }
 });
