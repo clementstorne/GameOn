@@ -17,6 +17,7 @@ const lastname = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+const cgu = document.getElementById("checkbox1");
 
 // console.log(formData[3]);
 
@@ -107,5 +108,16 @@ quantity.addEventListener("change", () => {
   } else {
     delete formData[4].dataset.error;
     delete formData[4].dataset.errorVisible;
+  }
+});
+
+cgu.addEventListener("change", () => {
+  if (!cgu.checked) {
+    formData[6].dataset.error =
+      "Vous devez vérifier que vous acceptez les termes et conditions.";
+    formData[6].dataset.errorVisible = "true";
+  } else {
+    delete formData[6].dataset.error;
+    delete formData[6].dataset.errorVisible;
   }
 });
