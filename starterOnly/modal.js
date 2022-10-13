@@ -18,9 +18,7 @@ const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const checkboxes = document.querySelectorAll(".checkbox-input[type=radio]");
-const cgu = document.getElementById("checkbox1");
-
-// console.log(formData[3]);
+const conditions = document.getElementById("checkbox1");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -54,65 +52,65 @@ function isNameValid(str) {
   return regex.test(str);
 }
 
-firstname.addEventListener("change", () => {
-  if (!isNameValid(firstname.value)) {
-    showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
-  } else {
-    hideErrorMessage(formData[0]);
-  }
-});
+// firstname.addEventListener("change", () => {
+//   if (!isNameValid(firstname.value)) {
+//     showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
+//   } else {
+//     hideErrorMessage(formData[0]);
+//   }
+// });
 
-lastname.addEventListener("change", () => {
-  if (!isNameValid(lastname.value)) {
-    showErrorMessage(formData[1], "Veuillez entrer 2 caractères ou plus.");
-  } else {
-    hideErrorMessage(formData[1]);
-  }
-});
+// lastname.addEventListener("change", () => {
+//   if (!isNameValid(lastname.value)) {
+//     showErrorMessage(formData[1], "Veuillez entrer 2 caractères ou plus.");
+//   } else {
+//     hideErrorMessage(formData[1]);
+//   }
+// });
 
 function isEmailValid(str) {
   let regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   return regex.test(str);
 }
 
-email.addEventListener("change", () => {
-  if (!isEmailValid(email.value)) {
-    showErrorMessage(formData[2], "Veuillez saisir un email valide.");
-  } else {
-    hideErrorMessage(formData[2]);
-  }
-});
+// email.addEventListener("change", () => {
+//   if (!isEmailValid(email.value)) {
+//     showErrorMessage(formData[2], "Veuillez saisir un email valide.");
+//   } else {
+//     hideErrorMessage(formData[2]);
+//   }
+// });
 
 function isBirthdateValid(str) {
   let regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
   return regex.test(str);
 }
 
-birthdate.addEventListener("change", () => {
-  if (!isBirthdateValid(birthdate.value)) {
-    showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
-  } else {
-    hideErrorMessage(formData[3]);
-  }
-});
+// birthdate.addEventListener("change", () => {
+//   if (!isBirthdateValid(birthdate.value)) {
+//     showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
+//   } else {
+//     hideErrorMessage(formData[3]);
+//   }
+// });
 
 function isANumber(str) {
   let regex = /^[0-9]+$/;
   return regex.test(str);
 }
 
-quantity.addEventListener("change", () => {
-  if (!isANumber(quantity.value)) {
-    showErrorMessage(formData[4], "Veuillez saisir une valeur numérique.");
-  } else if (quantity.value < 0 || quantity.value > 99) {
-    showErrorMessage(
-      formData[4],
-      "La valeur doit être comprise entre 0 et 99."
-    );
-  } else {
-    hideErrorMessage(formData[4]);
-  }
-});
+// quantity.addEventListener("change", () => {
+//   if (!isANumber(quantity.value)) {
+//     showErrorMessage(formData[4], "Veuillez saisir une valeur numérique.");
+//   } else if (quantity.value < 0 || quantity.value > 99) {
+//     showErrorMessage(
+//       formData[4],
+//       "La valeur doit être comprise entre 0 et 99."
+//     );
+//   } else {
+//     hideErrorMessage(formData[4]);
+//   }
+// });
 
 function isARadioButtonChecked() {
   for (let i = 0; i < checkboxes.length; i++) {
@@ -123,18 +121,83 @@ function isARadioButtonChecked() {
   return false;
 }
 
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener("click", () => {
-    if (!isARadioButtonChecked) {
-      showErrorMessage(formData[5], "Vous devez choisir une option.");
-    } else {
-      hideErrorMessage(formData[5]);
-    }
-  });
-});
+// checkboxes.forEach((checkbox) => {
+//   checkbox.addEventListener("click", () => {
+//     if (isARadioButtonChecked) {
+//       showErrorMessage(formData[5], "Vous devez choisir une option.");
+//     } else {
+//       hideErrorMessage(formData[5]);
+//     }
+//   });
+// });
 
-cgu.addEventListener("change", () => {
-  if (!cgu.checked) {
+// conditions.addEventListener("change", () => {
+//   if (!conditions.checked) {
+//     showErrorMessage(
+//       formData[6],
+//       "Vous devez vérifier que vous acceptez les termes et conditions."
+//     );
+//   } else {
+//     hideErrorMessage(formData[6]);
+//   }
+// });
+
+function validateFirstname() {
+  if (!isNameValid(firstname.value)) {
+    showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
+  } else {
+    hideErrorMessage(formData[0]);
+  }
+}
+
+function validateLastname() {
+  if (!isNameValid(lastname.value)) {
+    showErrorMessage(formData[1], "Veuillez entrer 2 caractères ou plus.");
+  } else {
+    hideErrorMessage(formData[1]);
+  }
+}
+
+function validateEmail() {
+  if (!isEmailValid(email.value)) {
+    showErrorMessage(formData[2], "Veuillez saisir un email valide.");
+  } else {
+    hideErrorMessage(formData[2]);
+  }
+}
+
+function validateBirthdate() {
+  if (!isBirthdateValid(birthdate.value)) {
+    showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
+  } else {
+    hideErrorMessage(formData[3]);
+  }
+}
+
+function validateQuantity() {
+  if (!isANumber(quantity.value)) {
+    showErrorMessage(formData[4], "Veuillez saisir une valeur numérique.");
+  } else if (quantity.value < 0 || quantity.value > 99) {
+    showErrorMessage(
+      formData[4],
+      "La valeur doit être comprise entre 0 et 99."
+    );
+  } else {
+    hideErrorMessage(formData[4]);
+  }
+}
+
+function validateRadioButtons() {
+  console.log(isARadioButtonChecked());
+  if (!isARadioButtonChecked()) {
+    showErrorMessage(formData[5], "Vous devez choisir une option.");
+  } else {
+    hideErrorMessage(formData[5]);
+  }
+}
+
+function validateConditions() {
+  if (!conditions.checked) {
     showErrorMessage(
       formData[6],
       "Vous devez vérifier que vous acceptez les termes et conditions."
@@ -142,4 +205,15 @@ cgu.addEventListener("change", () => {
   } else {
     hideErrorMessage(formData[6]);
   }
-});
+}
+
+function validate(event) {
+  event.preventDefault();
+  validateFirstname();
+  validateLastname();
+  validateEmail();
+  validateBirthdate();
+  validateQuantity();
+  validateRadioButtons();
+  validateConditions();
+}
