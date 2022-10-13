@@ -19,6 +19,14 @@ const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const checkboxes = document.querySelectorAll(".checkbox-input[type=radio]");
 const conditions = document.getElementById("checkbox1");
+const submitButton = document.querySelector(".btn-submit");
+const modalConfirmation = document.querySelector(".confirmation-modal");
+const modalConfirmationClose = document.querySelector(
+  ".confirmation-modal-close"
+);
+const modalConfirmationCloseButton = document.querySelector(
+  ".confirmation-modal-close-btn"
+);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -123,7 +131,7 @@ function isARadioButtonChecked() {
 
 // checkboxes.forEach((checkbox) => {
 //   checkbox.addEventListener("click", () => {
-//     if (isARadioButtonChecked) {
+//     if (!isARadioButtonChecked()) {
 //       showErrorMessage(formData[5], "Vous devez choisir une option.");
 //     } else {
 //       hideErrorMessage(formData[5]);
@@ -145,6 +153,7 @@ function isARadioButtonChecked() {
 function validateFirstname() {
   if (!isNameValid(firstname.value)) {
     showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
+    return false;
   } else {
     hideErrorMessage(formData[0]);
   }
@@ -188,7 +197,6 @@ function validateQuantity() {
 }
 
 function validateRadioButtons() {
-  console.log(isARadioButtonChecked());
   if (!isARadioButtonChecked()) {
     showErrorMessage(formData[5], "Vous devez choisir une option.");
   } else {
@@ -209,6 +217,7 @@ function validateConditions() {
 
 function validate(event) {
   event.preventDefault();
+  let isFormValid = null;
   validateFirstname();
   validateLastname();
   validateEmail();
@@ -216,4 +225,26 @@ function validate(event) {
   validateQuantity();
   validateRadioButtons();
   validateConditions();
+  if (
+    isNameValid(firstname.value) &&
+    isNameValid(lastname.value) &&
+    isEmailValid(email.value) &&
+    isBirthdateValid(birthdate.value) &&
+    isANumber(quantity.value) &&
+    isARadioButtonChecked() &&
+    conditions.checked
+  ) {
+    closeModal();
+    launchModalConfirmation();
+  }
+}
+
+function launchModalConfirmation() {
+  modalConfirmation.style.display = "block";
+}
+
+modalConfirmationClose.onclick = closeModalConfirmation;
+modalConfirmationCloseButton.onclick = closeModalConfirmation;
+function closeModalConfirmation() {
+  modalConfirmation.style.display = "none";
 }
