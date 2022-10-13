@@ -17,6 +17,7 @@ const lastname = document.getElementById("last");
 const email = document.getElementById("email");
 const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
+const checkboxes = document.querySelectorAll(".checkbox-input[type=radio]");
 const cgu = document.getElementById("checkbox1");
 
 // console.log(formData[3]);
@@ -37,6 +38,16 @@ function closeModal() {
 
 // Form fields checker
 
+function showErrorMessage(formData, message) {
+  formData.dataset.error = message;
+  formData.dataset.errorVisible = "true";
+}
+
+function hideErrorMessage(formData) {
+  delete formData.dataset.error;
+  delete formData.dataset.errorVisible;
+}
+
 function isNameValid(str) {
   let regex =
     /^[^0-9\.\,\"\?\!\;\:\#\$\%\&\(\)\*\+\/\<\>\=\@\[\]\\\^\_\{\}\|\~]{2,}$/;
@@ -45,21 +56,17 @@ function isNameValid(str) {
 
 firstname.addEventListener("change", () => {
   if (!isNameValid(firstname.value)) {
-    formData[0].dataset.error = "Veuillez entrer 2 caractères ou plus.";
-    formData[0].dataset.errorVisible = "true";
+    showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
   } else {
-    delete formData[0].dataset.error;
-    delete formData[0].dataset.errorVisible;
+    hideErrorMessage(formData[0]);
   }
 });
 
 lastname.addEventListener("change", () => {
   if (!isNameValid(lastname.value)) {
-    formData[1].dataset.error = "Veuillez entrer 2 caractères ou plus.";
-    formData[1].dataset.errorVisible = "true";
+    showErrorMessage(formData[1], "Veuillez entrer 2 caractères ou plus.");
   } else {
-    delete formData[1].dataset.error;
-    delete formData[1].dataset.errorVisible;
+    hideErrorMessage(formData[1]);
   }
 });
 
@@ -70,11 +77,9 @@ function isEmailValid(str) {
 
 email.addEventListener("change", () => {
   if (!isEmailValid(email.value)) {
-    formData[2].dataset.error = "Veuillez saisir un email valide.";
-    formData[2].dataset.errorVisible = "true";
+    showErrorMessage(formData[2], "Veuillez saisir un email valide.");
   } else {
-    delete formData[2].dataset.error;
-    delete formData[2].dataset.errorVisible;
+    hideErrorMessage(formData[2]);
   }
 });
 
@@ -85,11 +90,9 @@ function isBirthdateValid(str) {
 
 birthdate.addEventListener("change", () => {
   if (!isBirthdateValid(birthdate.value)) {
-    formData[3].dataset.error = "Vous devez entrer votre date de naissance.";
-    formData[3].dataset.errorVisible = "true";
+    showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
   } else {
-    delete formData[3].dataset.error;
-    delete formData[3].dataset.errorVisible;
+    hideErrorMessage(formData[3]);
   }
 });
 
@@ -100,24 +103,43 @@ function isANumber(str) {
 
 quantity.addEventListener("change", () => {
   if (!isANumber(quantity.value)) {
-    formData[4].dataset.error = "Veuillez saisir une valeur numérique.";
-    formData[4].dataset.errorVisible = "true";
+    showErrorMessage(formData[4], "Veuillez saisir une valeur numérique.");
   } else if (quantity.value < 0 || quantity.value > 99) {
-    formData[4].dataset.error = "La valeur doit être comprise entre 0 et 99.";
-    formData[4].dataset.errorVisible = "true";
+    showErrorMessage(
+      formData[4],
+      "La valeur doit être comprise entre 0 et 99."
+    );
   } else {
-    delete formData[4].dataset.error;
-    delete formData[4].dataset.errorVisible;
+    hideErrorMessage(formData[4]);
   }
+});
+
+function isARadioButtonChecked() {
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      return true;
+    }
+  }
+  return false;
+}
+
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener("click", () => {
+    if (!isARadioButtonChecked) {
+      showErrorMessage(formData[5], "Vous devez choisir une option.");
+    } else {
+      hideErrorMessage(formData[5]);
+    }
+  });
 });
 
 cgu.addEventListener("change", () => {
   if (!cgu.checked) {
-    formData[6].dataset.error =
-      "Vous devez vérifier que vous acceptez les termes et conditions.";
-    formData[6].dataset.errorVisible = "true";
+    showErrorMessage(
+      formData[6],
+      "Vous devez vérifier que vous acceptez les termes et conditions."
+    );
   } else {
-    delete formData[6].dataset.error;
-    delete formData[6].dataset.errorVisible;
+    hideErrorMessage(formData[6]);
   }
 });
