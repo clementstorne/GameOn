@@ -17,4 +17,4 @@ Projet n°4 du [parcours Développeur d'Application - JavaScript React](https://
 
 ## 💻 Démo du site
 
-[GameOn](https://clementstorne.github.io/gameon/)
+[GameOn](https://clementstorne.github.io/GameOn/)
