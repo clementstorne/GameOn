@@ -165,7 +165,6 @@ function validateConditions() {
 
 function validate(event) {
   event.preventDefault();
-  let isFormValid = null;
   validateFirstname();
   validateLastname();
   validateEmail();
