@@ -101,7 +101,6 @@ function isARadioButtonChecked() {
 function validateFirstname() {
   if (!isNameValid(firstname.value)) {
     showErrorMessage(formData[0], "Veuillez entrer 2 caractères ou plus.");
-    return false;
   } else {
     hideErrorMessage(formData[0]);
   }
