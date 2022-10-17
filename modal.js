@@ -80,7 +80,8 @@ function isEmailValid(str) {
 }
 
 function isBirthdateValid(str) {
-  let regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+  let regex =
+    /^((19[0-9]{2})|(20[0-9]{2}))-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))$/;
   return regex.test(str);
 }
 
@@ -127,7 +128,6 @@ function validateBirthdate() {
     showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
   } else {
     hideErrorMessage(formData[3]);
-    console.log(birthdate.value);
   }
 }
 
