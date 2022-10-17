@@ -127,6 +127,7 @@ function validateBirthdate() {
     showErrorMessage(formData[3], "Vous devez entrer votre date de naissance.");
   } else {
     hideErrorMessage(formData[3]);
+    console.log(birthdate.value);
   }
 }
 
