@@ -163,6 +163,19 @@ function validateConditions() {
   }
 }
 
+function clearFormFields() {
+  firstname.value = "";
+  firstname.value = "";
+  lastname.value = "";
+  email.value = "";
+  birthdate.value = "";
+  quantity.value = "";
+}
+
+function uncheckRadioButtons() {
+  checkboxes.forEach((checkbox) => (checkbox.checked = false));
+}
+
 function validate(event) {
   event.preventDefault();
   validateFirstname();
@@ -182,6 +195,8 @@ function validate(event) {
     conditions.checked
   ) {
     closeModal();
+    clearFormFields();
+    uncheckRadioButtons();
     launchModalConfirmation();
   }
 }
